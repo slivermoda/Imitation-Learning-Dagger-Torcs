@@ -4,3 +4,5 @@ _tmp.npy
 *.pyc
 *.txt
 image/
+.idea/
+data/

@@ -227,9 +227,9 @@ class TorcsEnv:
 
         return torcs_action
 
-
     def obs_vision_to_image_rgb(self, obs_image_vec):
-        image_vec =  obs_image_vec
+        # print("raw obs shape: {}".format(np.shape(obs_image_vec)))
+        image_vec = obs_image_vec
         r = image_vec[0:len(image_vec):3]
         g = image_vec[1:len(image_vec):3]
         b = image_vec[2:len(image_vec):3]

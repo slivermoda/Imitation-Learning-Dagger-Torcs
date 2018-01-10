@@ -8,6 +8,7 @@ from tensorlayer.layers import *
 from gym_torcs import TorcsEnv
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 
 img_dim = [64, 64, 3]
 n_action = 1        # steer only (float, left and right 1 ~ -1)
@@ -51,10 +52,13 @@ for i in range(steps):
         print("step:", i)
     # if i > 50: # quick stop for quick debug
     #     break
+    act = [0.0]
     ob, reward, done, _ = env.step(act)
     img_list.append(ob.img)
     action_list.append(act)
     reward_list.append(np.array([reward]))
+
+    print("step: {}, action: {}, reward: {}, ob: {}".format(i, act, reward, np.shape(ob.img)))
 
 env.end()
 
