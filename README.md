@@ -1,3 +1,7 @@
+## Torcs env used for policy improvement paper (modified from dagger code)
+Run gen_expert_traj.py to generate expert data. You can adjust the 'noise' parameter to let expert make mistakes;
+then the trajectory will not be optimal.
+
 ## Imitation Learning with Dataset Aggregation (DAGGER) on Torcs Env
 
 This repository implements a simple algorithm for imitation learning: [DAGGER](https://www.cs.cmu.edu/~sross1/publications/Ross-AIStats11-NoRegret.pdf).
