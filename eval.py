@@ -29,7 +29,7 @@ if __name__ == "__main__":
     ob_list = list()
 
     for i in range(steps):
-        act = model.act(img_reshape(ob.img), sess)
+        act = model.act(img_reshape(ob.img) / 255, sess)
         ob, reward, done, _ = env.step(act)
         if done is True:
             break
