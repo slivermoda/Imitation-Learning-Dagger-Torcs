@@ -6,3 +6,6 @@ _tmp.npy
 image/
 .idea/
 data/
+save/
+other_data/
+logs/

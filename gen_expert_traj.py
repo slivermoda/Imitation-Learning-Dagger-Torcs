@@ -8,8 +8,8 @@ import h5py
 class ETraj:
     def __init__(self, max_episode_len=1000):
         self.img_dim = [64, 64, 3]
-        self.n_action = 1        # steer only (float, left and right 1 ~ -1)
-        self.max_episode_len = max_episode_len        # maximum step for a game; if crash, get reward -1 and the game will restart
+        self.n_action = 1  # steer only (float, left and right 1 ~ -1)
+        self.max_episode_len = max_episode_len  # maximum step for a game; if crash, get reward -1 and the game restart
 
         # set up env
         self.env = TorcsEnv(vision=True, throttle=False)
@@ -29,7 +29,8 @@ class ETraj:
         steer = np.random.normal(steer, noise)
         return np.array([steer])
 
-    def img_reshape(self, input_img):
+    @staticmethod
+    def img_reshape(input_img):
         """ (3, 64, 64) --> (64, 64, 3) """
         _img = np.transpose(input_img, (1, 2, 0))
         _img = np.flipud(_img)
@@ -66,7 +67,8 @@ class ETraj:
 
         return traj
 
-    def save_data(self, traj, path):
+    @staticmethod
+    def save_data(traj, path):
         # save data
         print("#"*50)
         print('Packing data into arrays... ')
@@ -88,6 +90,10 @@ class ETraj:
 
 if __name__ == "__main__":
     et = ETraj(max_episode_len=1000)
-    traj = et.gen_one_episode(noise=10.0)
-    et.save_data(traj=traj, path='data/traj.h5')
+    for noise in [10, 5, 1, 0]:
+        for epoc in range(10):
+            rand_id = np.random.rand()
+            traj = et.gen_one_episode(noise=noise)
+            et.save_data(traj=traj, path='data/'+str(noise)+'_'+str(rand_id)+'.h5')
+
     et.close()
