@@ -54,7 +54,7 @@ class TorcsTrainer:
 
 if __name__ == "__main__":
     # data
-    data_folder = "/home/leihan/Codes_RL/torcs/Imitation-Learning-Dagger-Torcs/data"
+    data_folder = "data"
     data_list = glob.glob(data_folder+'/*.h5')
     x = None
     y = None
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     # trainer
     trainer = TorcsTrainer()
-    batch_size = 32
+    batch_size = 10
     for epoc in range(100):
         print("epoch: {}".format(epoc))
         for x_, y_ in tl.iterate.minibatches(x, y, batch_size, shuffle=True):
