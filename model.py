@@ -12,7 +12,7 @@ class TorcsNet:
 
         self.action_dim = ac_space[0]
 
-        with tf.variable_scope(name+"/Pnet") as Pnet:
+        with tf.variable_scope(name+"Pnet") as Pnet:
             self.__create_input_placeholder()
             self.__create_model()
 
