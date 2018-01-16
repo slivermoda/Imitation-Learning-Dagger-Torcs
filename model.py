@@ -2,7 +2,7 @@ from layers import *
 
 
 class TorcsNet:
-    def __init__(self, ob_space, ac_space):
+    def __init__(self, name, ob_space, ac_space):
         print('obs space: {}'.format(ob_space))
         print('action space: {}'.format(ac_space))
 
@@ -12,7 +12,7 @@ class TorcsNet:
 
         self.action_dim = ac_space[0]
 
-        with tf.variable_scope("Pnet") as Pnet:
+        with tf.variable_scope(name+"/Pnet") as Pnet:
             self.__create_input_placeholder()
             self.__create_model()
 
@@ -35,7 +35,9 @@ class TorcsNet:
         self.fc1 = linear(x=self.flatten_conv, size=512, name="fc1")
         # self.fc1 = tf.nn.dropout(x=self.fc1, keep_prob=0.75)
         self.fc2 = linear(x=self.fc1, size=256, name="fc2")
+
         self.res = linear(x=self.fc2, size=self.action_dim, name="res")
+        self.val = linear(x=self.fc2, size=1, name='val')
 
     def act(self, obs, sess):
         feed_dict = {self.img: [obs[0]]}
@@ -44,4 +46,4 @@ class TorcsNet:
 
 
 if __name__ == "__main__":
-    net = TorcsNet(ob_space=(64, 64, 3), ac_space=(1,))
+    net = TorcsNet('', ob_space=(64, 64, 3), ac_space=(1,))
