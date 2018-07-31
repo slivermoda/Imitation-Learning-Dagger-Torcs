@@ -7,5 +7,6 @@ image/
 .idea/
 data/
 save/
+save_pi_reweight/
 other_data/
 logs/

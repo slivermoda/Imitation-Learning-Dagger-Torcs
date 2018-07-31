@@ -18,7 +18,7 @@ if __name__ == "__main__":
     obs_space = (64, 64, 3)
     action_space = (1,)
 
-    model = TorcsNet(obs_space, action_space)
+    model = TorcsNet('', obs_space, action_space)
     saver = tf.train.Saver(var_list=model.var_list)
     sess = tf.Session()
     saver.restore(sess, save_path='save/model.ckpt')
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     ob_list = list()
 
     for i in range(steps):
-        act = model.act(img_reshape(ob.img) / 255, sess)
+        act = model.act(img_reshape(ob.img) / 255.0, sess)
         ob, reward, done, _ = env.step(act)
         if done is True:
             break

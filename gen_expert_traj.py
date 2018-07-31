@@ -26,7 +26,8 @@ class ETraj:
         """ Compute steer from image for getting data of demonstration """
         steer = obs.angle * 10 / np.pi
         steer -= obs.trackPos * 0.10
-        steer = np.random.normal(steer, noise)
+        steer = np.random.rand()-0.1
+        # steer = -steer
         return np.array([steer])
 
     @staticmethod
@@ -90,7 +91,7 @@ class ETraj:
 
 if __name__ == "__main__":
     et = ETraj(max_episode_len=1000)
-    for noise in [10, 5, 1, 0]:
+    for noise in [0.1]:
         for epoc in range(10):
             rand_id = np.random.rand()
             traj = et.gen_one_episode(noise=noise)
